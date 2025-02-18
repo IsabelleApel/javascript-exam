@@ -1,9 +1,10 @@
-import { fetchTopMovies } from './modules/api.js';
+import { fetchTopMovies, fetchSearchedMovies } from './modules/api.js';
 import oData from './data/data.js';
 import { createCard } from './components/movieCard.js'; 
 import { getElement } from './utils/domUtils.js';
 import { displaymovieDetails } from './modules/eventHandlers.js'
 import { renderTrailers } from './modules/caroussel.js';
+import { searchListener } from './modules/eventHandlers.js';    
 
 if(window.location.pathname === '/template/' || window.location.pathname === '/template/index.html') {
     console.log('index.html');
@@ -24,21 +25,27 @@ if(window.location.pathname === '/template/' || window.location.pathname === '/t
 
 async function setupMain(){
     await fetchTopMovies();
-    setupRecs();
     setupTrailers();
+    setupRecs();
+    searchListener();
+    
 }
 
 async function setupFavorites(){
 
 }
 
-async function setupMovie(movie){
-    console.log('hello');
-    
+async function setupMovie(){
+   
 }
 
 async function setupSearch(){
-
+    let searchedMovie = JSON.parse(localStorage.getItem('searchedMovie'));
+    let searchResault = await fetchSearchedMovies(searchedMovie);
+    
+    for(let movie of searchResault.Search){
+        console.log(movie);   
+    }
 }
 
 function setupRecs(){
@@ -47,7 +54,6 @@ function setupRecs(){
     oData.topMovieList.sort(() => Math.random() -0.5);
 
     for(let movie of oData.topMovieList){
-        console.log(movie);
         let card = createCard(movie);
         recsRef.appendChild(card);
         card.addEventListener('click', (event) => {
@@ -61,7 +67,6 @@ function setupTrailers(){
     oData.topMovieList.sort(() => Math.random() -0.5);
 
     let fiveTrailers = oData.topMovieList.slice(0, 5);
-    console.log(fiveTrailers);
     for (let i = 0; i < fiveTrailers.length; i++) {
         renderTrailers(fiveTrailers[i], i+1)
     }
