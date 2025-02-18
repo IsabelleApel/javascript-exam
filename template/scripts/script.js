@@ -4,7 +4,7 @@ import { createCard } from './components/movieCard.js';
 import { getElement } from './utils/domUtils.js';
 import { displaymovieDetails } from './modules/eventHandlers.js'
 import { renderTrailers } from './modules/caroussel.js';
-import { searchListener } from './modules/eventHandlers.js';    
+import { searchListener, handleFavourites } from './modules/eventHandlers.js';    
 
 if(window.location.pathname === '/template/' || window.location.pathname === '/template/index.html') {
     console.log('index.html');
@@ -27,8 +27,8 @@ async function setupMain(){
     await fetchTopMovies();
     setupTrailers();
     setupRecs();
+    handleFavourites();
     searchListener();
-    
 }
 
 async function setupFavorites(){
@@ -45,7 +45,7 @@ async function setupSearch(){
 
     const recsRef = getElement('#cardContainer');
     
-    for(let movie of searchResault.Search){
+    for(let movie of searchResault.Search){        
         let card = createCard(movie);
         recsRef.appendChild(card);
         card.addEventListener('click', (event) => {

@@ -8,7 +8,7 @@ export function createCard(movie){
         <div class="card-top">
             <img class="card-top__img" src="${movie.Poster || './res/icons/missing-poster.svg'}" 
             alt="movie-poster for ${movie.Title}">
-            <span class="card-top__heart"><i class="fa-regular fa-heart"></i></span>
+            <span class="card-top__heart" id="cardHeart"><i class="fa-regular fa-heart" id="heart"></i></span>
         </div>
         <div class="card-bottom">
             <h3 class="card-bottom__title">${movie.Title}</h3>

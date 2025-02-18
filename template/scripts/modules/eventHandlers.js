@@ -1,4 +1,4 @@
-import { getElement } from "../utils/domUtils.js";
+import { getElement, addClass, removeClass } from "../utils/domUtils.js";
 import oData from '../data/data.js';
 
 export async function displaymovieDetails(){
@@ -17,6 +17,15 @@ export function searchListener(){
     getElement('#searchForm').addEventListener('submit', (event) =>{
         event.preventDefault();
         window.location.href = `/template/search.html`;
+        
+    })
+}
+
+export function handleFavourites(){
+    const cardHeartRef = getElement('#cardHeart');
+    cardHeartRef.addEventListener('click', (event) => {
+        event.stopImmediatePropagation();
+        console.log('hello');
         
     })
 }
