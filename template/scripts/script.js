@@ -42,9 +42,16 @@ async function setupMovie(){
 async function setupSearch(){
     let searchedMovie = JSON.parse(localStorage.getItem('searchedMovie'));
     let searchResault = await fetchSearchedMovies(searchedMovie);
+
+    const recsRef = getElement('#cardContainer');
     
     for(let movie of searchResault.Search){
-        console.log(movie);   
+        let card = createCard(movie);
+        recsRef.appendChild(card);
+        card.addEventListener('click', (event) => {
+            event.preventDefault();
+            window.location.href = './movie.html';
+        });
     }
 }
 
