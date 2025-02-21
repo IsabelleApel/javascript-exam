@@ -84,14 +84,15 @@ body {
     cursor: pointer;
 }
 
-.popular-container{
+.content-wrapper--body{
     display: flex;
     flex-direction: column;
 }
 
-.popular-title{
+h2{
     align-self: center;
     margin-bottom: 2rem;
+    margin-top: 1rem;
     color: var(--text-yellow);
 }
 
