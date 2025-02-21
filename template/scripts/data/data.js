@@ -1,7 +1,7 @@
 
 const oData = {
     topMovieList : "",
-    // clickedMovie : "",
+    clickedMovie : "",
 }
 
 export default oData

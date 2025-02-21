@@ -11,3 +11,9 @@ export async function fetchSearchedMovies(str){
     let searchedMovies = await response.json();
     return searchedMovies;
 }
+
+export async function fetchMovieDetails(imdbID){
+    const response = await fetch(`http://www.omdbapi.com/?apikey=cabbb830&plot=full&i=${imdbID}`);
+    let movieDetails = await response.json();
+    return movieDetails;
+}
