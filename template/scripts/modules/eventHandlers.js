@@ -1,9 +1,13 @@
 import { getElement, getElements, addClass, removeClass } from "../utils/domUtils.js";
 import oData from '../data/data.js';
+import { createCard } from "../components/movieCard.js";
 
-export async function displaymovieDetails(){
-    console.log('hello world');
-    window.location.href = './movie.html'
+export async function displaymovieDetails(card, movie){
+    card.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.location.href = './movie.html';
+        localStorage.setItem('clickedMovie', JSON.stringify(movie))
+    });
 }
 
 export function searchListener(){

@@ -1,10 +1,9 @@
-import { fetchTopMovies, fetchSearchedMovies } from './modules/api.js';
+import { fetchTopMovies, fetchSearchedMovies, fetchMovieDetails } from './modules/api.js';
 import oData from './data/data.js';
 import { createCard } from './components/movieCard.js'; 
 import { getElement } from './utils/domUtils.js';
-import { displaymovieDetails } from './modules/eventHandlers.js'
 import { renderTrailers } from './modules/caroussel.js';
-import { searchListener, handleFavourites } from './modules/eventHandlers.js';    
+import { searchListener, handleFavourites, displaymovieDetails } from './modules/eventHandlers.js';    
 
 if(window.location.pathname === '/template/' || window.location.pathname === '/template/index.html') {
     console.log('index.html');
@@ -36,7 +35,13 @@ async function setupFavorites(){
 }
 
 async function setupMovie(){
-   
+    let clickedMovie = JSON.parse(localStorage.getItem('clickedMovie'));
+    let movieImdbID = clickedMovie.imdbID;
+    let movieDetails = await fetchMovieDetails(movieImdbID);
+    console.log(movieDetails);  
+    const recsRef = getElement('#movieInformation');
+    let card = createCard(movieDetails);
+    recsRef.appendChild(card);
 }
 
 async function setupSearch(){
@@ -48,11 +53,9 @@ async function setupSearch(){
     for(let movie of searchResault.Search){        
         let card = createCard(movie);
         recsRef.appendChild(card);
-        card.addEventListener('click', (event) => {
-            event.preventDefault();
-            window.location.href = './movie.html';
-        });
+        displaymovieDetails(card, movie)
     }
+    handleFavourites();
 }
 
 function setupRecs(){
@@ -63,10 +66,7 @@ function setupRecs(){
     for(let movie of oData.topMovieList){
         let card = createCard(movie);
         recsRef.appendChild(card);
-        card.addEventListener('click', (event) => {
-            event.preventDefault();
-            window.location.href = './movie.html';
-        });
+        displaymovieDetails(card, movie)
     }
 }
 
