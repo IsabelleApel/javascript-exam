@@ -6,7 +6,7 @@ export function createCard(movie){
     const cardTemp =`
     <a class="popular__link" href="">
         <div class="card-top">
-            <img class="card-top__img" src="${movie.Poster || './res/icons/missing-poster.svg'}" 
+            <img class="card-top__img" src="${checkPoster(movie)}" 
             alt="movie-poster for ${movie.Title}">
             <span class="card-top__heart"><i class="fa-regular fa-heart"></i></span>
         </div>
@@ -19,6 +19,14 @@ export function createCard(movie){
   cardRef.innerHTML = cardTemp;
 
   return cardRef;
+}
+
+function checkPoster(movie){
+    if(movie.Poster === 'N/A'){
+        return './res/icons/missing-poster.svg';
+    } else{
+        return movie.Poster;
+    }
 }
 
 

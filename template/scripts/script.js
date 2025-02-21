@@ -50,7 +50,9 @@ async function setupSearch(){
 
     const recsRef = getElement('#cardContainer');
     
-    for(let movie of searchResault.Search){        
+    for(let movie of searchResault.Search){  
+        console.log(movie);
+              
         let card = createCard(movie);
         recsRef.appendChild(card);
         displaymovieDetails(card, movie)
