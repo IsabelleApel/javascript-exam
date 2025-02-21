@@ -1,4 +1,4 @@
-import { getElement } from "../utils/domUtils.js";
+import { getElement, getElements, addClass, removeClass } from "../utils/domUtils.js";
 import oData from '../data/data.js';
 
 export async function displaymovieDetails(){
@@ -19,5 +19,27 @@ export function searchListener(){
         window.location.href = `/template/search.html`;
         
     })
+}
+
+export function handleFavourites(){
+    const heartRefs = getElements('.fa-heart');
+    
+    for(let heartRef of heartRefs){
+        
+        heartRef.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            if(heartRef.classList.contains('fa-regular')){
+                addClass(heartRef, 'fa-solid');
+                removeClass(heartRef, 'fa-regular')
+            } else{
+                addClass(heartRef, 'fa-regular');
+                removeClass(heartRef, 'fa-solid')
+            }
+            
+        })
+    }
+    
 }
 
