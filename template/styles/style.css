@@ -142,3 +142,70 @@ h2{
     color: var(--primary-bg);
     padding-left: 0.3rem;
 }
+
+#contentWrapperMovie{
+    display: flex;
+    justify-content: center;
+}
+
+.movie-information{
+    display: flex;
+    /* gap: 2rem; */
+    width: 70%;
+    box-shadow: 
+        0px -25px 20px -20px rgba(181, 181, 181, 0.45),
+        25px 0px 20px -20px rgba(181, 181, 181, 0.45),
+        0px 25px 20px -20px rgba(181, 181, 181, 0.45),
+        -25px 0px 20px -20px rgba(181, 181, 181, 0.45);
+    
+}
+
+.movie-information__img{
+    height: 30rem;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.movie-information__title{
+    margin-bottom: 0;
+    font-size: 2rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+}
+
+.movie-information__year{
+    padding: 0.5rem 1rem;
+}
+
+.movie-information__rating{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border-top: 1px solid rgba(181, 181, 181, 0.45);
+    border-bottom: 1px solid rgba(181, 181, 181, 0.45);
+}
+
+.movie-information__rating-text{
+    color: #ffffff;
+}
+
+
+
+.movie-information__blurb{
+    padding: 1rem;
+}
+
+.movie-information__actors{
+    border-top: 1px solid rgba(181, 181, 181, 0.45);
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: var(--text-yellow);
+}
+
+

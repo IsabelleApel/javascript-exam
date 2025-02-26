@@ -1,6 +1,6 @@
 import { fetchTopMovies, fetchSearchedMovies, fetchMovieDetails } from './modules/api.js';
 import oData from './data/data.js';
-import { createCard } from './components/movieCard.js'; 
+import { createCard, createMovieDetailCard, displayRatings, displayActors } from './components/movieCard.js'; 
 import { getElement } from './utils/domUtils.js';
 import { renderTrailers } from './modules/caroussel.js';
 import { searchListener, handleFavourites, displaymovieDetails } from './modules/eventHandlers.js';    
@@ -39,9 +39,11 @@ async function setupMovie(){
     let movieImdbID = clickedMovie.imdbID;
     let movieDetails = await fetchMovieDetails(movieImdbID);
     console.log(movieDetails);  
-    const recsRef = getElement('#movieInformation');
-    let card = createCard(movieDetails);
-    recsRef.appendChild(card);
+    const wrapperRef = getElement('#contentWrapperMovie');
+    let card = createMovieDetailCard(movieDetails);
+    wrapperRef.appendChild(card);
+    displayRatings(movieDetails.Ratings);
+    displayActors(movieDetails.Actors);
 }
 
 async function setupSearch(){
