@@ -34,7 +34,9 @@ function checkFavourites(card, imdbID){
 function checkPoster(movie){
     if(movie.Poster === 'N/A'){
         return './res/icons/missing-poster.svg';
-    } else{
+    } else if(!checkImageExists(movie.Poster)){
+        return './res/icons/missing-poster.svg'
+    }else{
         return movie.Poster;
     }
 }
@@ -42,7 +44,6 @@ function checkPoster(movie){
 async function checkImageExists(url) {
     try {
         const response = await fetch(url, { method: "HEAD" });
-        console.log('image', response);
         if(!response.ok) {
             throw new Error('Image does not exist');
         }
@@ -62,9 +63,13 @@ export function createMovieDetailCard(movie){
     <div class="movie-information__left">
         <img src="${checkPoster(movie)}" alt="Poster for ${movie.Title}" class="movie-information__img">
     </div>
-    <div class="movie-information__right">
+    <div class="movie-information__right card__link">
         <h2 class="movie-information__title">${movie.Title}</h2>
-        <P class="movie-information__year">${movie.Year}</P>
+        <p class="movie-id d-none">${movie.imdbID}</p>
+        <div class="movie-information__container--same-row">
+        <p class="movie-information__year">${movie.Year}</p>
+        <span class="movie-information__heart"><i class="fa-regular fa-heart"></i></span>
+        </div>
         <span style="color: #F5C518" class="movie-information__rating" id="movieRating">
         </span>
         <p class="movie-information__blurb">${movie.Plot}</p>
@@ -74,7 +79,7 @@ export function createMovieDetailCard(movie){
     `;
 
     cardRef.innerHTML = cardTemp;
-
+    checkFavourites(cardRef, movie.imdbID);
   return cardRef;
 }
 
