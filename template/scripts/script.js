@@ -31,7 +31,14 @@ async function setupMain(){
 }
 
 async function setupFavorites(){
-
+    let favourites = JSON.parse(localStorage.getItem('favourites'))
+    for(let favourite of favourites){
+        let movieInfo = await fetchMovieDetails(favourite);
+        const cardContainerRef = getElement('#favouritesCardContainer')
+        let card = createCard(movieInfo);
+        cardContainerRef.appendChild(card);
+    }
+    handleFavourites();
 }
 
 async function setupMovie(){
