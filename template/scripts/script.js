@@ -57,7 +57,7 @@ async function setupSearch(){
               
         let card = createCard(movie);
         recsRef.appendChild(card);
-        displaymovieDetails(card, movie)
+        displaymovieDetails(card, movie);
     }
     handleFavourites();
 }
