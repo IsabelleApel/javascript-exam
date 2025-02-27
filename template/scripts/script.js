@@ -19,7 +19,7 @@ if(window.location.pathname === '/template/' || window.location.pathname === '/t
 
 } else if(window.location.pathname === '/template/search.html') {
     console.log('search.html');
-    setupSearch();
+    setupSearch();    
 }
 
 async function setupMain(){
@@ -37,6 +37,7 @@ async function setupFavorites(){
         const cardContainerRef = getElement('#favouritesCardContainer')
         let card = createCard(movieInfo);
         cardContainerRef.appendChild(card);
+        displaymovieDetails(card, movieInfo)
     }
     handleFavourites();
 }
@@ -51,6 +52,7 @@ async function setupMovie(){
     wrapperRef.appendChild(card);
     displayRatings(movieDetails.Ratings);
     displayActors(movieDetails.Actors);
+    handleFavourites();
 }
 
 async function setupSearch(){
@@ -59,9 +61,7 @@ async function setupSearch(){
 
     const recsRef = getElement('#cardContainer');
     
-    for(let movie of searchResault.Search){  
-        console.log(movie);
-              
+    for(let movie of searchResault.Search){     
         let card = createCard(movie);
         recsRef.appendChild(card);
         displaymovieDetails(card, movie);

@@ -13,9 +13,8 @@ export async function displaymovieDetails(card, movie){
 export function searchListener(){
     const inputRef = getElement('#searchInput')
     inputRef.addEventListener('input', (event) => {
-        event.preventDefault();
+        event.preventDefault();       
         localStorage.setItem('searchedMovie', JSON.stringify(inputRef.value))
-
     })
     
     getElement('#searchForm').addEventListener('submit', (event) =>{
