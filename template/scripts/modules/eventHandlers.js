@@ -27,21 +27,27 @@ export function searchListener(){
 
 export function handleFavourites(){
     const heartRefs = getElements('.fa-heart');
+    let favourites = JSON.parse(localStorage.getItem('favourites')) || [];
     
-    for(let heartRef of heartRefs){
+    for(let heartRef of heartRefs){ 
+        const card = heartRef.closest('.card__link');
+        const imdbElem = card.querySelector('.movie-id');
+        const imdbID = imdbElem.textContent;
         
+
         heartRef.addEventListener('click', (event) => {
             event.preventDefault();
-            event.stopPropagation();
-            
-            if(heartRef.classList.contains('fa-regular')){
+            event.stopPropagation(); 
+            if(!favourites.includes(imdbID)){
+                favourites.push(imdbID);
                 addClass(heartRef, 'fa-solid');
                 removeClass(heartRef, 'fa-regular')
             } else{
+                favourites = favourites.filter(id => id !== imdbID);
                 addClass(heartRef, 'fa-regular');
                 removeClass(heartRef, 'fa-solid')
             }
-            
+           localStorage.setItem('favourites', JSON.stringify(favourites)); 
         })
     }
     
