@@ -35,9 +35,9 @@ export function createMovieDetailCard(movie){
     <div class="movie-information__right heart-aim">
         <h3 class="movie-information__title">${movie.Title}</h3>
         <p class="movie-id d-none">${movie.imdbID}</p>
-        <div class="movie-information__container--same-row">
-        <p class="movie-information__year">${movie.Year}</p>
-        <span class="movie-information__heart"><i class="fa-regular fa-heart"></i></span>
+        <div class="movie-information__year-heart">
+        <p>${movie.Year}</p>
+        <span><i class="fa-regular fa-heart"></i></span>
         </div>
         <span style="color: #F5C518" class="movie-information__rating" id="movieRating">
         </span>
