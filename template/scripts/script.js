@@ -6,19 +6,15 @@ import { renderTrailers } from './modules/caroussel.js';
 import { searchListener, handleFavourites, displaymovieDetails } from './modules/eventHandlers.js';    
 
 if(window.location.pathname === '/template/' || window.location.pathname === '/template/index.html') {
-    console.log('index.html');
     setupMain();
 
 } else if(window.location.pathname === '/template/favorites.html') {
-    console.log('favorites.html');
     setupFavorites();
 
 } else if(window.location.pathname === '/template/movie.html') {
-    console.log('movie.html');
     setupMovie();
 
 } else if(window.location.pathname === '/template/search.html') {
-    console.log('search.html');
     setupSearch();    
 }
 
@@ -31,13 +27,14 @@ async function setupMain(){
 }
 
 async function setupFavorites(){
-    let favourites = JSON.parse(localStorage.getItem('favourites'))
+    let favourites = JSON.parse(localStorage.getItem('favourites'));
+
     for(let favourite of favourites){
         let movieInfo = await fetchMovieDetails(favourite);
-        const cardContainerRef = getElement('#favouritesCardContainer')
+        const cardContainerRef = getElement('#cardContainer');
         let card = createCard(movieInfo);
         cardContainerRef.appendChild(card);
-        displaymovieDetails(card, movieInfo)
+        displaymovieDetails(card, movieInfo);
     }
     handleFavourites();
 }
@@ -45,11 +42,9 @@ async function setupFavorites(){
 async function setupMovie(){
     let clickedMovie = JSON.parse(localStorage.getItem('clickedMovie'));
     let movieImdbID = clickedMovie.imdbID;
-    let movieDetails = await fetchMovieDetails(movieImdbID);
-    console.log(movieDetails);  
-    const wrapperRef = getElement('#contentWrapperMovie');
-    let card = createMovieDetailCard(movieDetails);
-    wrapperRef.appendChild(card);
+    let movieDetails = await fetchMovieDetails(movieImdbID); 
+
+    createMovieDetailCard(movieDetails);
     displayRatings(movieDetails.Ratings);
     displayActors(movieDetails.Actors);
     handleFavourites();
@@ -58,7 +53,6 @@ async function setupMovie(){
 async function setupSearch(){
     let searchedMovie = JSON.parse(localStorage.getItem('searchedMovie'));
     let searchResault = await fetchSearchedMovies(searchedMovie);
-
     const recsRef = getElement('#cardContainer');
     
     for(let movie of searchResault.Search){     
@@ -71,24 +65,23 @@ async function setupSearch(){
 
 function setupRecs(){
     const recsRef = getElement('#cardContainer');
-
     oData.topMovieList.sort(() => Math.random() -0.5);
+    let topTwenty = oData.topMovieList.slice(0, 24);
 
-    for(let movie of oData.topMovieList){
+    for(let movie of topTwenty){
         let card = createCard(movie);
         recsRef.appendChild(card);
-        displaymovieDetails(card, movie)
+        displaymovieDetails(card, movie);
     }
 }
 
 function setupTrailers(){
     oData.topMovieList.sort(() => Math.random() -0.5);
-
     let fiveTrailers = oData.topMovieList.slice(0, 5);
+
     for (let i = 0; i < fiveTrailers.length; i++) {
-        renderTrailers(fiveTrailers[i], i+1)
-    }
-    
+        renderTrailers(fiveTrailers[i], i+1);
+    }  
 }
 
     
