@@ -1,8 +1,6 @@
 
-let oData = {
+const oData = {
     topMovieList : "",
-    clickedMovie : "",
-    searchedMovie : "",
 }
 
 export default oData

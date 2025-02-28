@@ -1,10 +1,10 @@
-import {getElement, getElements, createElement, addClass, removeClass} from '../utils/domUtils.js' 
+import { getElement, createElement, addClass, removeClass } from '../utils/domUtils.js' 
 
 export function createCard(movie){
     const cardRef = createElement('article');
     addClass(cardRef, 'card');
     const cardTemp =`
-    <a class="card__link" href="">
+    <a class="card__link heart-aim" href="">
         <div class="card-top">
             <img class="card-top__img" src="${checkPoster(movie)}" 
             alt="movie-poster for ${movie.Title}">
@@ -63,8 +63,8 @@ export function createMovieDetailCard(movie){
     <div class="movie-information__left">
         <img src="${checkPoster(movie)}" alt="Poster for ${movie.Title}" class="movie-information__img">
     </div>
-    <div class="movie-information__right card__link">
-        <h2 class="movie-information__title">${movie.Title}</h2>
+    <div class="movie-information__right heart-aim">
+        <h3 class="movie-information__title">${movie.Title}</h3>
         <p class="movie-id d-none">${movie.imdbID}</p>
         <div class="movie-information__container--same-row">
         <p class="movie-information__year">${movie.Year}</p>

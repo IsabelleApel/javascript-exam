@@ -22,6 +22,9 @@ body {
     background-color: var(--primary-bg);
     max-width: 100%;
     color: var(--primary-white);
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
 }
 
 /* Utils */
@@ -80,17 +83,17 @@ body {
     cursor: pointer;
 }
 
-.content-wrapper--body{
+.content-wrapper--main{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 h2{
-    align-self: center;
     margin-bottom: 2rem;
     margin-top: 1rem;
     color: var(--text-yellow);
+    font-weight: 500;
 }
 
 .card__link{
@@ -109,16 +112,14 @@ h2{
 .card{
     width: 250px;
     background-color: var(--text-yellow);
-    padding: 0.3rem;
+    padding: 0.5rem;
     position: relative;
     border-radius: 3px;
 }
 
-.card-top{
-
-}
 .card-top__img{
  width: 100%;
+ height: 340px;
 }
 
 .card-top__heart{
@@ -131,19 +132,13 @@ h2{
     display: grid;
     place-items: center;
 }
-.card-bottom{
-
-}
 
 .card-bottom__title{
     color: var(--primary-bg);
-    padding-left: 0.3rem;
+    padding: 0.5rem 0.3rem;
+    font-weight: 500;
 }
 
-#contentWrapperMovie{
-    display: flex;
-    justify-content: center;
-}
 
 .movie-information{
     display: flex;
@@ -173,8 +168,9 @@ h2{
 .movie-information__title{
     margin-bottom: 0;
     font-size: 2rem;
-    padding-bottom: 0.5rem;
-    padding-left: 1rem;
+    padding: 1rem;
+    color: var(--text-yellow);
+    font-weight: 500;
 }
 
 .movie-information__container--same-row{
@@ -182,6 +178,10 @@ h2{
     flex-direction: row;
     justify-content: space-between;
     padding: 0.5rem 1rem;
+}
+
+.fa-heart:hover{
+    cursor: pointer;
 }
 
 .movie-information__rating{
@@ -197,10 +197,9 @@ h2{
     color: #ffffff;
 }
 
-
-
 .movie-information__blurb{
     padding: 1rem;
+    font-weight: 400;
 }
 
 .movie-information__actors{
