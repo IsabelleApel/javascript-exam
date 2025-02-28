@@ -28,15 +28,22 @@ async function setupMain(){
 
 async function setupFavorites(){
     let favourites = JSON.parse(localStorage.getItem('favourites'));
+    const cardContainerRef = getElement('#cardContainer');
 
-    for(let favourite of favourites){
-        let movieInfo = await fetchMovieDetails(favourite);
-        const cardContainerRef = getElement('#cardContainer');
-        let card = createCard(movieInfo);
-        cardContainerRef.appendChild(card);
-        displaymovieDetails(card, movieInfo);
-    }
-    handleFavourites();
+    const movieFetch = favourites.map(favourite => fetchMovieDetails(favourite));
+
+    try{
+        const movies = await Promise.all(movieFetch);
+
+        movies.forEach(movieInfo => {
+            let card = createCard(movieInfo);
+            cardContainerRef.appendChild(card);
+            displaymovieDetails(card, movieInfo);
+        });
+        handleFavourites();
+    }catch(error){
+        console.error('Movie details not fetched', error);
+    }   
 }
 
 async function setupMovie(){
