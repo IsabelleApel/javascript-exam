@@ -94,6 +94,7 @@ h2{
     margin-top: 1rem;
     color: var(--text-yellow);
     font-weight: 500;
+    font-size: 2.2rem;
 }
 
 .card__link{
@@ -173,7 +174,7 @@ h2{
     font-weight: 500;
 }
 
-.movie-information__container--same-row{
+.movie-information__year-heart{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
