@@ -6,7 +6,7 @@ export function createCard(movie){
     const cardTemp =`
     <a class="card__link heart-aim" href="">
         <div class="card-top">
-            <img class="card-top__img" src="${checkPoster(movie)}" 
+            <img class="card-top__img" src="" 
             alt="movie-poster for ${movie.Title}">
             <span class="card-top__heart"><i class="fa-regular fa-heart"></i></span>
         </div>
@@ -18,50 +18,19 @@ export function createCard(movie){
     `;
 
   cardRef.innerHTML = cardTemp;
+  const imgRef = cardRef.querySelector('.card-top__img');
+  displayMoviePoster(movie).then(moviePoster =>{
+    imgRef.src = moviePoster;
+  })
   checkFavourites(cardRef, movie.imdbID);
   return cardRef;
 }
-
-function checkFavourites(card, imdbID){
-    const heartRef = card.querySelector('.fa-heart');
-    let favourites = JSON.parse(localStorage.getItem('favourites')) || [];
-        if(favourites.includes(imdbID)){
-            addClass(heartRef, 'fa-solid');
-            removeClass(heartRef, 'fa-regular');
-        }  
-}
-
-function checkPoster(movie){
-    if(movie.Poster === 'N/A'){
-        return './res/icons/missing-poster.svg';
-    } else if(!checkImageExists(movie.Poster)){
-        return './res/icons/missing-poster.svg'
-    }else{
-        return movie.Poster;
-    }
-}
-
-async function checkImageExists(url) {
-    try {
-        const response = await fetch(url, { method: "HEAD" });
-        if(!response.ok) {
-            throw new Error('Image does not exist');
-        }
-        return response.ok;
-    } catch (error) {
-        console.log(error.message);
-        return false;
-    }
-}
-
-
-
 
 export function createMovieDetailCard(movie){
     const cardRef = getElement('#movieInformation')
     const cardTemp = `
     <div class="movie-information__left">
-        <img src="${checkPoster(movie)}" alt="Poster for ${movie.Title}" class="movie-information__img">
+        <img src="" alt="Poster for ${movie.Title}" class="movie-information__img">
     </div>
     <div class="movie-information__right heart-aim">
         <h3 class="movie-information__title">${movie.Title}</h3>
@@ -79,8 +48,39 @@ export function createMovieDetailCard(movie){
     `;
 
     cardRef.innerHTML = cardTemp;
+    const imgRef = cardRef.querySelector('.movie-information__img');
+    displayMoviePoster(movie).then(moviePoster =>{
+      imgRef.src = moviePoster;
+    })
     checkFavourites(cardRef, movie.imdbID);
   return cardRef;
+}
+
+function checkFavourites(card, imdbID){
+    const heartRef = card.querySelector('.fa-heart');
+    let favourites = JSON.parse(localStorage.getItem('favourites')) || [];
+        if(favourites.includes(imdbID)){
+            addClass(heartRef, 'fa-solid');
+            removeClass(heartRef, 'fa-regular');
+        }  
+}
+
+async function displayMoviePoster(movie){
+    const moviePoster = await checkPoster(movie);
+    return moviePoster;
+}
+
+async function checkPoster(movie) {
+    try {
+        const response = await fetch(movie.Poster);
+        if(!response.ok || movie.Poster === 'N/A') {
+            throw new Error('Image does not exist');
+        }
+        return movie.Poster;
+    } catch (error) {
+        console.log(error.message);
+        return './res/icons/missing-poster.svg';
+    }
 }
 
 export function displayRatings(ratings){

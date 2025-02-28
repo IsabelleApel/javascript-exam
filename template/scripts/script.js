@@ -34,7 +34,6 @@ async function setupFavorites(){
 
     try{
         const movies = await Promise.all(movieFetch);
-
         movies.forEach(movieInfo => {
             let card = createCard(movieInfo);
             cardContainerRef.appendChild(card);
