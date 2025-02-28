@@ -21,6 +21,10 @@
 body {
     background-color: var(--primary-bg);
     max-width: 100%;
+    color: var(--primary-white);
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
 }
 
 /* Utils */
@@ -30,10 +34,6 @@ body {
 }
 .center {
     margin: 0 auto;
-}
-
-.d-none {
-    display: none;
 }
 
 .header {
@@ -82,3 +82,152 @@ body {
     border: none;
     cursor: pointer;
 }
+
+.content-wrapper--main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2{
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    color: var(--text-yellow);
+    font-weight: 500;
+}
+
+.card__link{
+    text-decoration: none;
+    color: var(--primary-white);
+}
+
+.card-container{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.card{
+    width: 250px;
+    background-color: var(--text-yellow);
+    padding: 0.5rem;
+    position: relative;
+    border-radius: 3px;
+}
+
+.card-top__img{
+ width: 100%;
+ height: 340px;
+}
+
+.card-top__heart{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: var(--primary-grey);
+    padding: .3rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.card-bottom__title{
+    color: var(--primary-bg);
+    padding: 0.5rem 0.3rem;
+    font-weight: 500;
+}
+
+
+.movie-information{
+    display: flex;
+    width: 80%;
+    max-width: 1000px;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    box-shadow: 
+        0px -20px 20px -20px rgba(181, 181, 181, 0.45),
+        20px 0px 20px -20px rgba(181, 181, 181, 0.45),
+        0px 20px 20px -20px rgba(181, 181, 181, 0.45),
+        -20px 0px 20px -20px rgba(181, 181, 181, 0.45);
+    
+}
+
+.movie-information__left{
+    display: flex;
+    align-items: center;
+}
+
+.movie-information__img{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.movie-information__title{
+    margin-bottom: 0;
+    font-size: 2rem;
+    padding: 1rem;
+    color: var(--text-yellow);
+    font-weight: 500;
+}
+
+.movie-information__container--same-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+}
+
+.fa-heart:hover{
+    cursor: pointer;
+}
+
+.movie-information__rating{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    border-top: 1px solid rgba(181, 181, 181, 0.45);
+    border-bottom: 1px solid rgba(181, 181, 181, 0.45);
+}
+
+.movie-information__rating-text{
+    color: #ffffff;
+}
+
+.movie-information__blurb{
+    padding: 1rem;
+    font-weight: 400;
+}
+
+.movie-information__actors{
+    border-top: 1px solid rgba(181, 181, 181, 0.45);
+    padding: 1rem;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    color: var(--text-yellow);
+}
+
+@media screen and (max-width: 750px) {
+    .movie-information{
+        flex-direction: column;
+    }
+    .movie-information__left{
+        width: 100%;
+    }
+    .movie-information__img{
+        width: 100%;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 5px;
+    }
+}
+
+.d-none {
+    display: none;
+}
+
+
